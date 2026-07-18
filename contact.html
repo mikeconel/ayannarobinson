@@ -97,34 +97,79 @@
                 <div class="col-lg-7 fade-in">
                     <div class="card p-4 border-0 shadow-sm h-100">
                         <h4 class="mb-4">Send a Message</h4>
-                        <form id="contactForm" novalidate>
+                        
+                        <!-- FormSubmit.co secure relay form -->
+                        <form id="contactForm" action="https://formsubmit.co/an4r28@gmail.com" method="POST" novalidate>
+                            
+                            <!-- ============================================ -->
+                            <!-- LEVEL 1 BOT DETECTION: Honeypot (hidden trap) -->
+                            <!-- ============================================ -->
+                            <input type="text" name="_honey" style="display:none">
+                            
+                            <!-- ============================================ -->
+                            <!-- LEVEL 2 BOT DETECTION: Timestamp validation   -->
+                            <!-- ============================================ -->
+                            <input type="hidden" name="_timestamp" id="timestampField" value="">
+                            
+                            <!-- ============================================ -->
+                            <!-- LEVEL 3 BOT DETECTION: Math CAPTCHA question  -->
+                            <!-- ============================================ -->
+                            <div class="mb-3">
+                                <label for="captcha" class="form-label">Please solve: <span id="captchaQuestion">What is 4 + 5?</span> *</label>
+                                <input type="number" class="form-control" id="captcha" placeholder="Enter your answer" required>
+                                <input type="hidden" id="captchaAnswer" value="">
+                                <div class="invalid-feedback">Please answer the security question correctly.</div>
+                                <small class="text-muted">This helps prevent automated spam submissions.</small>
+                            </div>
+
+                            <!-- FormSubmit.co additional options -->
+                            <input type="hidden" name="_subject" value="New message from Ayanna Robinson's Portfolio">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_next" value="https://mikeconel.github.io/ayannarobinson/thank-you.html">
+                            
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="name" class="form-label">Full Name *</label>
-                                    <input type="text" class="form-control" id="name" required placeholder="John Doe">
+                                    <input type="text" class="form-control" id="name" name="name" required placeholder="John Doe">
                                     <div class="invalid-feedback">Please enter your name.</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="email" class="form-label">Email Address *</label>
-                                    <input type="email" class="form-control" id="email" required placeholder="john@example.com">
+                                    <input type="email" class="form-control" id="email" name="email" required placeholder="john@example.com">
                                     <div class="invalid-feedback">Please enter a valid email address.</div>
                                 </div>
                             </div>
                             
                             <div class="mb-3">
                                 <label for="subject" class="form-label">Subject *</label>
-                                <input type="text" class="form-control" id="subject" required placeholder="Opportunity regarding Production Assistant Role">
+                                <input type="text" class="form-control" id="subject" name="subject" required placeholder="Opportunity regarding Production Assistant Role">
                                 <div class="invalid-feedback">Please enter a subject.</div>
                             </div>
                             
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <label for="message" class="form-label">Message *</label>
-                                <textarea class="form-control" id="message" rows="6" required placeholder="Hello Ayanna, we are looking for..."></textarea>
+                                <textarea class="form-control" id="message" name="message" rows="6" required placeholder="Hello Ayanna, we are looking for..."></textarea>
                                 <div class="invalid-feedback">Please write your message.</div>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary w-100 py-3 fw-bold">Send Message <i class="fas fa-paper-plane ms-2"></i></button>
+                            <!-- Mailto fallback: the form submits via FormSubmit, but a direct mailto link is also provided -->
+                            <div class="mb-3 text-center">
+                                <small class="text-muted">Or email me directly: <a href="mailto:an4r28@gmail.com?subject=Enquiry%20from%20Portfolio" class="text-primary">an4r28@gmail.com</a></small>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100 py-3 fw-bold">
+                                <i class="fas fa-envelope me-2"></i> Send Message via Email
+                                <i class="fas fa-paper-plane ms-2"></i>
+                            </button>
                         </form>
+                        
+                        <!-- Direct mailto fallback button (alternative) -->
+                        <div class="mt-3 text-center">
+                            <a href="mailto:an4r28@gmail.com?subject=Enquiry%20from%20Portfolio" class="btn btn-outline-secondary w-100 py-2">
+                                <i class="fas fa-external-link-alt me-2"></i> Or email directly
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -147,6 +192,106 @@
     <!-- Custom JS -->
     <script src="script.js"></script>
     <script>
+        // ============================================================
+        // LEVEL 1 & 2 BOT DETECTION: Timestamp & JavaScript check
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set timestamp when the page loads (bots often skip JavaScript)
+            const timestampField = document.getElementById('timestampField');
+            if (timestampField) {
+                timestampField.value = new Date().getTime().toString();
+            }
+            
+            // ============================================================
+            // LEVEL 3: Generate random math CAPTCHA
+            // ============================================================
+            const num1 = Math.floor(Math.random() * 9) + 2;  // 2-10
+            const num2 = Math.floor(Math.random() * 9) + 2;  // 2-10
+            const answer = num1 + num2;
+            
+            document.getElementById('captchaQuestion').textContent = 'What is ' + num1 + ' + ' + num2 + '?';
+            document.getElementById('captchaAnswer').value = answer;
+            
+            // ============================================================
+            // Form validation with CAPTCHA check
+            // ============================================================
+            const form = document.getElementById('contactForm');
+            const captchaInput = document.getElementById('captcha');
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    // Validate CAPTCHA answer
+                    const userAnswer = parseInt(captchaInput.value, 10);
+                    const correctAnswer = parseInt(document.getElementById('captchaAnswer').value, 10);
+                    
+                    if (userAnswer !== correctAnswer || isNaN(userAnswer)) {
+                        e.preventDefault();
+                        captchaInput.classList.add('is-invalid');
+                        captchaInput.focus();
+                        alert('Please answer the security question correctly.');
+                        return false;
+                    } else {
+                        captchaInput.classList.remove('is-invalid');
+                    }
+                    
+                    // Basic validation for other fields
+                    const name = document.getElementById('name');
+                    const email = document.getElementById('email');
+                    const subject = document.getElementById('subject');
+                    const message = document.getElementById('message');
+                    let isValid = true;
+                    
+                    if (!name.value.trim()) {
+                        name.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        name.classList.remove('is-invalid');
+                    }
+                    
+                    if (!email.value.trim() || !email.validity.valid) {
+                        email.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        email.classList.remove('is-invalid');
+                    }
+                    
+                    if (!subject.value.trim()) {
+                        subject.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        subject.classList.remove('is-invalid');
+                    }
+                    
+                    if (!message.value.trim()) {
+                        message.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        message.classList.remove('is-invalid');
+                    }
+                    
+                    if (!isValid) {
+                        e.preventDefault();
+                        return false;
+                    }
+                    
+                    // If all valid, form submits to FormSubmit.co
+                    // The form will send an email directly via FormSubmit's mailto relay
+                });
+            }
+            
+            // ============================================================
+            // Real-time validation clearing
+            // ============================================================
+            document.querySelectorAll('#contactForm .form-control').forEach(function(input) {
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('is-invalid') && this.value.trim()) {
+                        this.classList.remove('is-invalid');
+                    }
+                });
+            });
+        });
+        
+        // Update copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>

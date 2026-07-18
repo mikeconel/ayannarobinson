@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Mockups | Ayanna Robinson</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Print settings to ensure PDF exports beautifully */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            font-family: 'Open Sans', sans-serif;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Certificate Container */
+        .certificate-wrapper {
+            width: 297mm; /* A4 Landscape width */
+            height: 210mm; /* A4 Landscape height */
+            background-color: white;
+            margin: 20px auto;
+            position: relative;
+            box-sizing: border-box;
+            padding: 20mm;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            page-break-after: always; /* Ensures each certificate is on a new PDF page */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Print overrides to remove shadow and margin on exported PDF */
+        @media print {
+            .certificate-wrapper {
+                margin: 0;
+                box-shadow: none;
+            }
+            body { background-color: white; }
+        }
+
+        /* Fancy Borders */
+        .border-outer {
+            position: absolute;
+            top: 10mm; left: 10mm; right: 10mm; bottom: 10mm;
+            border: 2px solid #2C3E50;
+        }
+        .border-inner {
+            position: absolute;
+            top: 12mm; left: 12mm; right: 12mm; bottom: 12mm;
+            border: 4px double #2C3E50;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 45px;
+            color: #2C3E50;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .presented-to {
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        .name {
+            font-family: 'Cinzel', serif;
+            font-size: 40px;
+            color: #E74C3C;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            display: inline-block;
+            min-width: 400px;
+        }
+        .course-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 40px;
+            max-width: 80%;
+        }
+        
+        /* Footer / Signatures */
+        .cert-footer {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-top: 40px;
+        }
+        .signature-block {
+            text-align: center;
+            width: 200px;
+        }
+        .signature-line {
+            border-bottom: 1px solid #333;
+            margin-bottom: 5px;
+            height: 40px;
+        }
+        .date-line {
+            font-weight: 600;
+            color: #333;
+        }
+        .issuer-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+        
+        /* Specific Branding Colors */
+        .albert-theme .border-outer, .albert-theme .border-inner { border-color: #27ae60; }
+        .albert-theme h1, .albert-theme .issuer-logo, .albert-theme .course-title { color: #27ae60; }
+        
+        .milsome-theme .border-outer, .milsome-theme .border-inner { border-color: #2980b9; }
+        .milsome-theme h1, .milsome-theme .issuer-logo, .milsome-theme .course-title { color: #2980b9; }
+    </style>
+</head>
+<body>
+
+    <!-- Certificate 1: BAFTA albert -->
+    <!--<div class="certificate-wrapper albert-theme"> -->
+    <div id="albert" class="certificate-wrapper albert-theme">
+    
+        <div class="border-outer"></div>
+        <div class="border-inner"></div>
+        
+        <div class="issuer-logo">BAFTA albert</div>
+        
+        <h1>Certificate of Completion</h1>
+        <div class="subtitle">This acknowledges that</div>
+        
+        <div class="presented-to">the following individual</div>
+        <div class="name">Ayanna Robinson</div>
+        
+        <div class="presented-to">has successfully completed the training requirements for</div>
+        <div class="course-title">Sustainability Workshop: Television Production</div>
+        
+        <div class="cert-footer">
+            <div class="signature-block">
+                <div class="signature-line" style="font-family: 'Brush Script MT', cursive; font-size: 24px; padding-top: 10px; color: #333;">Albert Team</div>
+                <div>Authorized Signature</div>
+            </div>
+            <div class="signature-block">
+                <div class="signature-line date-line" style="display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 5px;">
+                    Issued: Mar 2026<br>
+                    Expires: Mar 2028
+                </div>
+                <div>Validity Period</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate 2: Mark Milsome Foundation -->
+    <!--<div class="certificate-wrapper milsome-theme"> -->
+    <div id="milsome" class="certificate-wrapper milsome-theme">
+        <div class="border-outer"></div>
+        <div class="border-inner"></div>
+        
+        <div class="issuer-logo">The Mark Milsome Foundation<br><span style="font-size: 14px; font-family: 'Open Sans', sans-serif;">in partnership with ProTrainings Europe Ltd</span></div>
+        
+        <h1>Certificate of Completion</h1>
+        <div class="subtitle">Online Safety Passport</div>
+        
+        <div class="presented-to">This certifies that</div>
+        <div class="name">Ayanna Robinson</div>
+        
+        <div class="presented-to">has successfully completed the</div>
+        <div class="course-title">Film and TV Online Safety Passport Course</div>
+        
+        <div class="cert-footer">
+            <div class="signature-block">
+                <div class="signature-line" style="font-family: 'Brush Script MT', cursive; font-size: 24px; padding-top: 10px; color: #333;">M. Milsome</div>
+                <div>Authorized Signature</div>
+            </div>
+            <div class="signature-block">
+                <div class="signature-line date-line" style="display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 5px;">
+                    Issued: Jan 2026<br>
+                    Expires: Jan 2031
+                </div>
+                <div>Validity Period</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
